@@ -1,16 +1,10 @@
-function cleanSet(set, startString) {
-  let result = '';
-  set.forEach((value) => {
-    if (value.startsWith(startString)) {
-      const trimmedValue = value.substring(startString.length);
-      result += `${trimmedValue}-`;
-    }
+export default function cleanSet(set, startString) {
+  if (!startString || !startString.length || typeof startString !== 'string') return '';
+
+  let finalString = '';
+  set.forEach((element) => {
+    if (element && element.startsWith(startString)) finalString += `${element.slice(startString.length)}-`;
   });
 
-  if (result.length > 0) {
-    result = result.slice(0, -1);
-  }
-  return result;
+  return finalString.slice(0, finalString.length - 1);
 }
-
-export default cleanSet;
